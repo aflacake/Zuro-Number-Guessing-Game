@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden; /* To hide any overflowing content */
+        }
+        h1 {
+            font-size: 3rem;
+            color: #4CAF50;
+            text-shadow: 2px 2px 4px #000000;
+        }
+        input[type="number"] {
+            font-size: 1.5rem;
+            padding: 10px;
+            margin: 10px;
+        }
+        button {
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            font-size: 1.5rem;
+            margin-top: 20px;
+        }
+        .previous-guesses {
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+        /* Bold Flower Design */
+        .flower {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            z-index: -1;
+            width: 200px;
+            height: 200px;
+        }
+        .flower .petal {
+            width: 70px;
+            height: 70px;
+            background-color: #FF69B4;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .flower .center {
+            width: 50px;
+            height: 50px;
+            background-color: #FFD700;
+            border-radius: 50%;
+            position: absolute;
+            top: 75px;
+            left: 75px;
+        }
+        .flower:nth-child(1) .petal:nth-child(1) { transform: rotate(0deg) translateX(80px); }
+        .flower:nth-child(1) .petal:nth-child(2) { transform: rotate(60deg) translateX(80px); }
+        .flower:nth-child(1) .petal:nth-child(3) { transform: rotate(120deg) translateX(80px); }
+        .flower:nth-child(1) .petal:nth-child(4) { transform: rotate(180deg) translateX(80px); }
+        .flower:nth-child(1) .petal:nth-child(5) { transform: rotate(240deg) translateX(80px); }
+        .flower:nth-child(1) .petal:nth-child(6) { transform: rotate(300deg) translateX(80px); }
+        /* Left and Right Decorative Borders */
+        .left-decor, .right-decor {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 20%;
+            background: linear-gradient(to right, #FFB6C1, #FF69B4);
+        }
+        .left-decor {
+            left: 0;
+        }
+        .right-decor {
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Zuro Game!</h1>
+
+    <!-- Left and Right Decoration -->
+    <div class="left-decor"></div>
+    <div class="right-decor"></div>
+
+    <!-- Bold Flower Elements -->
+    <div class="flower">
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="center"></div>
+    </div>
+
+    <p>Guess a number between 1 and 100:</p>
+    <input type="number" id="userInput" min="1" max="100">
+    <button onclick="checkGuess()">Submit</button>
+    <div class="result" id="result"></div>
+
+    <div class="previous-guesses">
+        <h2>Previous Guesses:</h2>
+        <ul id="guessList"></ul>
+    </div>
+
+    <script>
+        const randomNumber = Math.floor(Math.random() * 100) + 1;
+        let previousGuesses = [];
+
+        function checkGuess() {
+            const userGuess = parseInt(document.getElementById('userInput').value);
+            const result = document.getElementById('result');
+            const guessList = document.getElementById('guessList');
+
+            if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) {
+                result.textContent = "Please enter a valid number between 1 and 100.";
+                return;
+            }
+
+            // Add the guess to the list of previous guesses
+            previousGuesses.push(userGuess);
+
+            // Display previous guesses
+            guessList.innerHTML = '';
+            previousGuesses.forEach(function(guess) {
+                const guessItem = document.createElement('li');
+                guessItem.textContent = guess;
+                guessList.appendChild(guessItem);
+            });
+
+            if (userGuess < randomNumber) {
+                result.textContent = "Too low! Try again.";
+            } else if (userGuess > randomNumber) {
+                result.textContent = "Too high! Try again.";
+            } else {
+                result.textContent = "Congratulations! You guessed the correct number: " + randomNumber;
+            }
+        }
+    </script>
+</body>
+</html>
