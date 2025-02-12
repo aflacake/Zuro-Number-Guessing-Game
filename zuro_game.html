@@ -13,7 +13,7 @@
             position: relative;
             overflow: hidden; /* To hide any overflowing content */
         }
-        h1 {
+        h2 {
             font-size: 3rem;
             color: #4CAF50;
             text-shadow: 2px 2px 4px #000000;
@@ -42,6 +42,10 @@
         .previous-guesses {
             font-size: 1.2rem;
             margin-top: 20px;
+        }
+        h3 {
+            color: #4CAF50;
+            text-shadow: 1px 1px 2.5px #000000;
         }
         /* Bold Flower Design */
         .flower {
@@ -79,7 +83,7 @@
             position: absolute;
             top: 0;
             bottom: 0;
-            width: 20%;
+            width: 10%;
             background: linear-gradient(to right, #FFB6C1, #FF69B4);
         }
         .left-decor {
@@ -91,7 +95,7 @@
     </style>
 </head>
 <body>
-    <h1>Welcome to Zuro Game!</h1>
+    <h2>Welcome to Zuro Guest Game!</h2>
 
     <!-- Left and Right Decoration -->
     <div class="left-decor"></div>
@@ -114,12 +118,12 @@
     <div class="result" id="result"></div>
 
     <div class="previous-guesses">
-        <h2>Previous Guesses:</h2>
+        <h3>Previous Guesses:</h3>
         <ul id="guessList"></ul>
     </div>
 
     <script>
-        const randomNumber = Math.floor(Math.random() * 100) + 1;
+        const randomNumber = Math.floor(Math.random() * 100) ;
         let previousGuesses = [];
 
         function checkGuess() {
@@ -154,4 +158,3 @@
     </script>
 </body>
 </html>
-
